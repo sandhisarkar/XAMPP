@@ -1,0 +1,150 @@
+<div class="input-group mb-3">
+                                    <input id="myInput" type="text" class="form-control" placeholder="Search.." autofocus>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    </div>
+                                </div>
+                                <div id = "range_reporting_table">
+                                    
+                                    <table class="table table-hover table-bordered table-striped" border ='1' width='100%' style = "text-align: center; overflow-x:auto;font-size: small;">
+                                    <thead class="thead-dark">
+                                            <tr>
+                                                <!--th style = 'padding:auto;'>Sl. No.</th-->
+                                                <th style = 'padding:auto;'>State</th>
+                                                <th style = 'padding:auto;'>District</th>
+											                          <th style = 'padding:auto;'>Department</th>	 		
+                                                <th style = 'padding:auto;'>Operator ID</th>
+                                                <th style = 'padding:auto;'>Operator Name</th>
+                                                <th style = 'padding:auto;'>PEC Location</th>
+                                                <th style = 'padding:auto;'>Station ID </th>
+                                                <th style = 'padding:auto;'>Reporting Date</th>
+                                                <th style = 'padding:auto;'>Present/Absent</th>
+                                            </tr>
+                                    </thead>
+                                    <?php
+                                    if($district == "All")
+                                    {
+                                        $stdt = strtotime($datestartapplication);
+                                        $enddt = strtotime($dateendapplication);
+                                        $stepVal = '+1 day';
+                                        while($stdt <= $enddt)
+                                        {
+                                            
+                                            
+                                            $disdt = date('Y-m-d',$stdt);
+
+                                            $sql_op = "SELECT distinct(operator_id) from tbl_operator where (operator_id NOT IN (select operator_id from tbl_attendance where created_dttm ='".$disdt."' and  state = '".$state."') OR operator_id IN (select operator_id from tbl_attendance where created_dttm ='".$disdt."' and  state = '".$state."') ) and  state = '".$state."'  and  (emp_status = 1 or emp_status = 2) ";
+                                            $result_op = mysqli_query($con, $sql_op);
+                                            while($row1 = mysqli_fetch_row($result_op)) 
+                                            {
+                                                $opid = $row1[0];
+
+                                                $sql_result = "SELECT Distinct `state`,district,dept,operator_id,username,pec_location,station_id from tbl_operator where operator_id = '".$opid."'";
+                                                $result_result = mysqli_query($con, $sql_result);
+                                                
+                                                while($row2 = mysqli_fetch_row($result_result)) 
+                                                {
+                                                    $stat = "";
+                                                    $dt = date("Y-m-d",$stdt);
+                                                    $q = "SELECT distinct operator_id from tbl_attendance where operator_id = '".$opid."' and created_dttm = '".$dt."' ";
+                                                    $queryx=mysqli_query($con , $q);
+                                                    $resx=mysqli_fetch_row($queryx);
+                                                    
+                                                    $totpres = mysqli_num_rows($queryx);
+
+                                                    if($totpres != 0)
+                                                    {
+                                                      $stat = "Present";
+                                                    }
+                                                    else
+                                                    {
+                                                      $stat = "Absent";
+                                                    }
+
+                                                    ?>
+                                                    <tbody id="myTable">
+                                                    <tr>
+                                                        <td style = "padding: auto;"><?php echo  $row2[0]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[1]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[2]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[3]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[4]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[5]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[6]?></td>
+                                                        <td style = "padding: auto;"><?php echo  date('d-M-Y',$stdt)?></td>
+                                                        <td style = "padding: auto;"><?php echo  $stat?></td>
+                                                    </tr>   
+                                                    </tbody> 
+                                                    <?php
+                                                    
+                                                }
+                                            }
+
+                                            $stdt = strtotime($stepVal,$stdt);
+                                        }
+                                    
+                                    }
+                                    else
+                                    {
+                                        $stdt = strtotime($datestartapplication);
+                                        $enddt = strtotime($dateendapplication);
+                                        $stepVal = '+1 day';
+                                        while($stdt <= $enddt)
+                                        {
+                                            
+                                            
+                                            $disdt = date('Y-m-d',$stdt);
+
+                                            $sql_op = "SELECT distinct(operator_id) from tbl_operator where ( operator_id NOT IN (select operator_id from tbl_attendance where created_dttm ='".$disdt."' and  state = '".$state."' and district='".$district."') OR operator_id IN (select operator_id from tbl_attendance where created_dttm ='".$disdt."' and  state = '".$state."' and district='".$district."') ) and  state = '".$state."' and district='".$district."' and  (emp_status = 1 or emp_status = 2) ";
+                                            $result_op = mysqli_query($con, $sql_op);
+                                            while($row1 = mysqli_fetch_row($result_op)) 
+                                            {
+                                                $opid = $row1[0];
+
+                                                $sql_result = "SELECT Distinct `state`,district,dept,operator_id,username,pec_location,station_id from tbl_operator where operator_id = '".$opid."'";
+                                                $result_result = mysqli_query($con, $sql_result);
+                                                
+                                                while($row2 = mysqli_fetch_row($result_result)) 
+                                                {
+
+                                                  $stat = "";
+                                                  $dt = date("Y-m-d",$stdt);
+                                                  $q = "SELECT distinct operator_id from tbl_attendance where operator_id = '".$opid."' and created_dttm = '".$dt."' ";
+                                                  $queryx=mysqli_query($con , $q);
+                                                  $resx=mysqli_fetch_row($queryx);
+                                                  
+                                                  $totpres = mysqli_num_rows($queryx);
+
+                                                  if($totpres != 0)
+                                                  {
+                                                    $stat = "Present";
+                                                  }
+                                                  else
+                                                  {
+                                                    $stat = "Absent";
+                                                  }
+
+                                                    ?>
+                                                    <tbody id="myTable">
+                                                    <tr>
+                                                        <td style = "padding: auto;"><?php echo  $row2[0]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[1]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[2]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[3]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[4]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[5]?></td>
+                                                        <td style = "padding: auto;"><?php echo  $row2[6]?></td>
+                                                        <td style = "padding: auto;"><?php echo  date('d-M-Y',$stdt)?></td>
+                                                        <td style = "padding: auto;"><?php echo  $stat?></td>
+                                                    </tr>   
+                                                    </tbody> 
+                                                    <?php
+                                                }
+                                            }
+
+                                            $stdt = strtotime($stepVal,$stdt);
+                                        }
+                                    }
+                                    ?>
+                                    </table>
+                                </div>

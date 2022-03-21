@@ -1,0 +1,168 @@
+body
+{
+    background-color: #f8f6f6; 
+}
+#divtop
+{
+    background-color: transparent; 
+    width: 1000px;
+    height:480px;
+    border-radius:5px;
+    display:block;
+    margin-left:250px;
+	margin-top: 100px;
+    //box-shadow: 0px 0px 14px #999999; 
+}
+
+#adivtop
+{
+    background-image:url(../images/bg1.jpg); 
+    width: 1000px;
+    height:480px;
+    border-radius:5px;
+    display:block;
+    margin-left:170px;
+     box-shadow: 0px 0px 14px #999999; 
+}
+
+#divbot
+{
+    background-image: url(../images/lightg.jpg); 
+    width: 1000px;
+    height:650px;
+    margin-left:170px;
+    display:block;
+    
+}
+
+#dmain
+{
+    #box-shadow: 0px 0px 14px #999999; 
+    #border-radius:5px;
+    #border-color: #d3d3d3;
+    #border-width: 1px;
+    #border-style: solid;
+    #background-color:white;
+    width:450px;
+    height:375px;
+    margin-left:-235px;
+    margin-top: -70px;
+    
+}
+
+
+
+#u_id 
+{
+    margin-left: 8px;
+   
+}
+
+#u_ps
+{
+    margin-left: 8px;
+   
+}
+
+#u_sub
+{
+
+    margin-left: 8px;
+}
+
+
+
+#a_id 
+{
+    margin-left: 8px;
+   
+}
+
+#a_ps
+{
+    margin-left: 8px;
+   
+}
+
+#a_sub
+{
+
+    margin-left: 80px;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 3;
+  //cursor: pointer;
+}
+
+#text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+.load-icon {
+    width: 100px;
+    height: 20px;
+}
+.load-icon span {
+    position: absolute;
+    display: inline-block;
+    background: white;
+    width: 20%;
+    height: 100%;
+    border-radius: 100px;
+}
+.load-icon span:nth-of-type(1) {
+    left: 0;
+}
+.load-icon span:nth-of-type(2) {
+    left: 40%;
+}
+.load-icon span:nth-of-type(3) {
+    right: 0;
+}
+
+/* Animation */
+.load-icon span {
+    animation-name: loading;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+.load-icon span:nth-of-type(2) {
+    animation-delay: .2s;
+}
+.load-icon span:nth-of-type(3) {
+    animation-delay: .4s;
+}
+
+
+/* Keyframes */
+@keyframes loading {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.center {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

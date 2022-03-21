@@ -1,0 +1,93 @@
+/* set entire body that is webpage */
+body{
+	/*background: #383a3d;*/
+	padding-top: 25vh;	
+}
+/* set form background colour*/
+form{
+	/*background: #fff;*/
+	background: transparent;
+	border-style: double;
+}
+/* set padding and size of th form */
+.form-container{
+	border-radius: 10px;
+	padding: 30px;
+}
+
+#overlay {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 3;
+	//cursor: pointer;
+  }
+  
+  #text{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 50px;
+	color: white;
+	transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+  }
+  
+  .load-icon {
+	  width: 100px;
+	  height: 20px;
+  }
+  .load-icon span {
+	  position: absolute;
+	  display: inline-block;
+	  background: white;
+	  width: 20%;
+	  height: 100%;
+	  border-radius: 100px;
+  }
+  .load-icon span:nth-of-type(1) {
+	  left: 0;
+  }
+  .load-icon span:nth-of-type(2) {
+	  left: 40%;
+  }
+  .load-icon span:nth-of-type(3) {
+	  right: 0;
+  }
+  
+  /* Animation */
+  .load-icon span {
+	  animation-name: loading;
+	  animation-duration: 1.5s;
+	  animation-iteration-count: infinite;
+	  animation-fill-mode: both;
+  }
+  .load-icon span:nth-of-type(2) {
+	  animation-delay: .2s;
+  }
+  .load-icon span:nth-of-type(3) {
+	  animation-delay: .4s;
+  }
+  
+  
+  /* Keyframes */
+  @keyframes loading {
+	  0% { opacity: 1; }
+	  50% { opacity: 0; }
+	  100% { opacity: 1; }
+  }
+  
+  .center {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+  }
